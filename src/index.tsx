@@ -1,10 +1,16 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
+import { observe } from './Game';
+import Board from './components/Board';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root') as HTMLElement
+observe(knightPosition =>
+  ReactDOM.render(
+    <Board knightPosition={knightPosition} />,
+    document.getElementById('root') as HTMLElement
+  )
 );
+
+
+
 registerServiceWorker();
