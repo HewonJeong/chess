@@ -1,8 +1,24 @@
-type Receive = (args:number[]) => void
+// TODO: Refacetor todo as class
 
-export function observe(receive: Receive) {
-  setInterval(() => receive([
-    Math.floor(Math.random() * 8),
-    Math.floor(Math.random() * 8)
-  ]), 500);
+type Observer = ((position:number[]) => void) | null
+
+let knightPosition = [0, 0];
+let observer: Observer = null;
+
+function emitChange() {
+  observer && observer(knightPosition);
+}
+
+export function observe(o: (position:number[]) => void) {
+  if (observer) {
+    throw new Error('Multiple observers not implemented.');
+  }
+
+  observer = o;
+  emitChange();
+}
+
+export function moveKnight(toX: number, toY: number) {
+  knightPosition = [toX, toY];
+  emitChange();
 }
