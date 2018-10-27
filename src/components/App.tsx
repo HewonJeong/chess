@@ -1,13 +1,10 @@
 import * as React from 'react';
-import Square from './Square';
-import Knight from './Knight';
+import Board from './Board';
 
 class App extends React.Component {
   render() {
     return (
-      <Square black={true}>
-        <Knight />
-       </Square>
+      <Board knightPosition={[0, 0]} />
     );
   }
 }
