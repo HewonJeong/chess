@@ -1,0 +1,1 @@
+A tiny chess app with Typescript and [react-dnd](https://react-dnd.github.io/react-dnd/) to implement components with drag and drop interfaces with hoc
