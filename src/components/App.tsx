@@ -1,11 +1,13 @@
 import * as React from 'react';
+import Square from './Square';
+import Knight from './Knight';
 
 class App extends React.Component {
   render() {
     return (
-      <div>
-        Let's make chess App
-      </div>
+      <Square black={true}>
+        <Knight />
+       </Square>
     );
   }
 }
