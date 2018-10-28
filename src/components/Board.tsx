@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Square from './Square';
 import Knight from './Knight';
 import { Style } from 'src/types';
 import { moveKnight, canMoveKnight } from '../Game';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import BoardSquare from './BoardSquare';
 
 interface Props {
   knightPosition: number[]
@@ -14,19 +14,21 @@ class Board extends React.Component<Props> {
   renderSquare(i: number) {
     const x = i % 8;
     const y = Math.floor(i / 8);
-    const black = (x + y) % 2 === 1;
-    const [knightX, knightY] = this.props.knightPosition;
-    const piece = (x === knightX && y === knightY) ? <Knight /> : null;
 
     return (
-      <div key={i}
-         style={style.SquareWrapper}
-         onClick={this.handleSquareClick(x, y)}>
-      <Square black={black}>
-        {piece}
-      </Square>
-    </div>
+      <div key={i} style={style.boardSquareWrapper}>
+        <BoardSquare x={x} y={y}>
+          {this.renderPiece(x, y)}
+        </BoardSquare>
+      </div>
     );
+  }
+
+  renderPiece(x: number, y: number) {
+    const [knightX, knightY] = this.props.knightPosition;
+    if (x === knightX && y === knightY) {
+      return <Knight />;
+    }
   }
 
   handleSquareClick= (toX: number, toY: number) => () => {
@@ -56,5 +58,5 @@ const style: Style = {
     display: 'flex',
     flexWrap: 'wrap'
   },
-  SquareWrapper: { width: '12.5%', height: '12.5%' }
+  boardSquareWrapper: { width: '12.5%', height: '12.5%' }
 } 
