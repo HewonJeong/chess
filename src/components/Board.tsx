@@ -2,6 +2,7 @@ import * as React from 'react';
 import Square from './Square';
 import Knight from './Knight';
 import { Style } from 'src/types';
+import { moveKnight } from '../Game';
 
 interface Props {
   knightPosition: number[]
@@ -16,13 +17,17 @@ export default class Board extends React.Component<Props> {
     const piece = (x === knightX && y === knightY) ? <Knight /> : null;
 
     return (
-      <div key={i} style={style.SquareWrapper}>
-        <Square black={black}>
-          {piece}
-        </Square>
-      </div>
+      <div key={i}
+         style={style.SquareWrapper}
+         onClick={this.handleSquareClick(x, y)}>
+      <Square black={black}>
+        {piece}
+      </Square>
+    </div>
     );
   }
+
+  handleSquareClick= (toX: number, toY: number) => () => moveKnight(toX, toY);
 
   render() {
     const squares = [];
