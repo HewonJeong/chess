@@ -2,7 +2,7 @@ import * as React from 'react';
 import Square from './Square';
 import Knight from './Knight';
 import { Style } from 'src/types';
-import { moveKnight } from '../Game';
+import { moveKnight, canMoveKnight } from '../Game';
 
 interface Props {
   knightPosition: number[]
@@ -27,7 +27,9 @@ export default class Board extends React.Component<Props> {
     );
   }
 
-  handleSquareClick= (toX: number, toY: number) => () => moveKnight(toX, toY);
+  handleSquareClick= (toX: number, toY: number) => () => {
+    canMoveKnight(toX, toY) && moveKnight(toX, toY);
+  }
 
   render() {
     const squares = [];
