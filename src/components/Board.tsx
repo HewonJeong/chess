@@ -3,12 +3,14 @@ import Square from './Square';
 import Knight from './Knight';
 import { Style } from 'src/types';
 import { moveKnight, canMoveKnight } from '../Game';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 interface Props {
   knightPosition: number[]
 }
 
-export default class Board extends React.Component<Props> {
+class Board extends React.Component<Props> {
   renderSquare(i: number) {
     const x = i % 8;
     const y = Math.floor(i / 8);
@@ -44,6 +46,8 @@ export default class Board extends React.Component<Props> {
     );
   }
 }
+
+export default DragDropContext(HTML5Backend)(Board);
 
 const style: Style = {
   Board: {
