@@ -26,9 +26,7 @@ class Board extends React.Component<Props> {
 
   renderPiece(x: number, y: number) {
     const [knightX, knightY] = this.props.knightPosition;
-    if (x === knightX && y === knightY) {
-      return <Knight />;
-    }
+    return (x === knightX && y === knightY) ? <Knight /> : null;
   }
 
   handleSquareClick= (toX: number, toY: number) => () => {
